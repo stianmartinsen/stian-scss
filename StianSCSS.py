@@ -15,6 +15,11 @@ class StianScssCommand(sublime_plugin.TextCommand):
         # Newline before new selector
         text = re.sub(r'([;}])\n([^\n]*){', r'\1\n\n\2{', text)
 
+        # Remove excessive newlines
+        text = re.sub(r'{\n\n+', r'{\n', text)
+        text = re.sub(r'}\n\n+(\s*)}', r'}\n\1}', text)
+        text = re.sub(r';\n\n+(.*);', r';\n\1;', text)
+
         # Ensure one selector per line
         # TODO
 
